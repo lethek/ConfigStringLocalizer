@@ -6,6 +6,20 @@
     <IsPackable>false</IsPackable>
 
     <RootNamespace>Myxas.ConfigStringLocalizer</RootNamespace>
+
+    <Authors>Michael Monsour</Authors>
+
+    <Company>MYXAS</Company>
+
+    <Copyright>Copyright (c) 2018 Michael Monsour</Copyright>
+
+    <PackageLicenseUrl>https://raw.githubusercontent.com/lethek/ConfigStringLocalizer/master/LICENSE</PackageLicenseUrl>
+
+    <PackageProjectUrl>https://github.com/lethek/ConfigStringLocalizer</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/lethek/ConfigStringLocalizer</RepositoryUrl>
+
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
