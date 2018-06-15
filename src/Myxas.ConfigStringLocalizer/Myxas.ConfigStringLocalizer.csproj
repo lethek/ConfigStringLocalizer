@@ -8,7 +8,7 @@
     <Company>MYXAS</Company>
     <Copyright>Copyright (c) 2018 Michael Monsour</Copyright>
     <Version>0.1.0</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://raw.githubusercontent.com/lethek/ConfigStringLocalizer/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/lethek/ConfigStringLocalizer</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lethek/ConfigStringLocalizer</RepositoryUrl>
