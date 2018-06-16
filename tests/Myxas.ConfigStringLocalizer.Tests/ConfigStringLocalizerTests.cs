@@ -19,8 +19,8 @@ namespace Myxas.ConfigStringLocalizer
         public ConfigStringLocalizerTests()
         {
             var config = new ConfigurationBuilder()
-                .AddJsonFile("Resources/Tests1.json")
-                .AddJsonFile("Resources/Tests2.json")
+                .AddJsonFile(AppContext.BaseDirectory + "/Resources/Tests1.json")
+                .AddJsonFile(AppContext.BaseDirectory + "/Resources/Tests2.json")
                 .Build();
 
             var options = Options.Create(

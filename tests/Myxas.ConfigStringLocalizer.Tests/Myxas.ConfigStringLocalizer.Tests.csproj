@@ -1,31 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-
+    <TargetFrameworks>net46;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;</TargetFrameworks>
     <IsPackable>false</IsPackable>
-
     <RootNamespace>Myxas.ConfigStringLocalizer</RootNamespace>
-
     <Authors>Michael Monsour</Authors>
-
     <Company>MYXAS</Company>
-
     <Copyright>Copyright (c) 2018 Michael Monsour</Copyright>
-
     <PackageLicenseUrl>https://raw.githubusercontent.com/lethek/ConfigStringLocalizer/master/LICENSE</PackageLicenseUrl>
-
     <PackageProjectUrl>https://github.com/lethek/ConfigStringLocalizer</PackageProjectUrl>
-
     <RepositoryUrl>https://github.com/lethek/ConfigStringLocalizer</RepositoryUrl>
-
     <Version>0.1.0</Version>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp1.1' OR '$(TargetFramework)'=='net46'">
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="1.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp2.0' OR '$(TargetFramework)'=='netcoreapp2.1'">
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
