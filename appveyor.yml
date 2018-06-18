@@ -24,6 +24,9 @@ build:
 after_build:
   - ps: >-
       dotnet pack .\src\Myxas.ConfigStringLocalizer\Myxas.ConfigStringLocalizer.csproj -o .\ -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
+artifacts:
+  - path: .\src\**\*.nupkg
+    name: NuGet
 deploy:
 - provider: NuGet
   api_key:
