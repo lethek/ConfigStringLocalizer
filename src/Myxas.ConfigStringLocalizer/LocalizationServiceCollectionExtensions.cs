@@ -44,8 +44,8 @@ namespace Myxas.ConfigStringLocalizer
                 throw new ArgumentNullException(nameof(services));
             }
 
-            // To enable unit testing
             services.TryAddSingleton<IStringLocalizerFactory, ConfigStringLocalizerFactory>();
+            services.TryAddTransient<IStringLocalizer, ConfigStringLocalizer>();
             services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
 
             if (setupAction != null) {

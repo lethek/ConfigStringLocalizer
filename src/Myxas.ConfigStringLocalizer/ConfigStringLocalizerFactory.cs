@@ -16,11 +16,11 @@ namespace Myxas.ConfigStringLocalizer
 
 
         public IStringLocalizer Create(Type resourceSource)
-            => new ConfigStringLocalizer(_options.Value.Configuration);
+            => new ConfigStringLocalizer(_options.Value.Configuration, _options.Value.KeyComparer);
 
 
         public IStringLocalizer Create(string baseName, string location)
-            => new ConfigStringLocalizer(_options.Value.Configuration);
+            => new ConfigStringLocalizer(_options.Value.Configuration, _options.Value.KeyComparer);
 
 
         private readonly IOptions<ConfigLocalizationOptions> _options;

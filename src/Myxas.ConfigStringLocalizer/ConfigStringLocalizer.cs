@@ -12,9 +12,10 @@ namespace Myxas.ConfigStringLocalizer
 {
     public class ConfigStringLocalizer : IStringLocalizer
     {
-        public ConfigStringLocalizer(IConfiguration config, CultureInfo withCulture = null)
+        public ConfigStringLocalizer(IConfiguration config, StringComparer keyComparer, CultureInfo withCulture = null)
         {
             _config = config;
+            _keyComparer = keyComparer;
             _withCulture = withCulture;
 
             ChangeToken.OnChange(() => _config.GetReloadToken(), LoadResources);
@@ -34,7 +35,7 @@ namespace Myxas.ConfigStringLocalizer
 
 
         public IStringLocalizer WithCulture(CultureInfo culture)
-            => new ConfigStringLocalizer(_config, culture);
+            => new ConfigStringLocalizer(_config, _keyComparer, culture);
 
 
         public LocalizedString this[string name] {
@@ -84,7 +85,7 @@ namespace Myxas.ConfigStringLocalizer
 
         private void LoadResources()
         {
-            var newResources = new Dictionary<string, Dictionary<string, string>>();
+            var newResources = new Dictionary<string, Dictionary<string, string>>(_keyComparer);
             foreach (var child in _config.GetChildren()) {
                 var translations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                 foreach (var resource in child.GetChildren()) {
@@ -112,6 +113,7 @@ namespace Myxas.ConfigStringLocalizer
 
 
         private readonly IConfiguration _config;
+        private readonly StringComparer _keyComparer;
         private readonly CultureInfo _withCulture;
     }
 }

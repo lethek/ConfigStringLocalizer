@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+
+using Microsoft.Extensions.Configuration;
 
 
 namespace Myxas.ConfigStringLocalizer
@@ -7,5 +9,6 @@ namespace Myxas.ConfigStringLocalizer
     public class ConfigLocalizationOptions
     {
         public IConfiguration Configuration { get; set; }
+        public StringComparer KeyComparer { get; set; }
     }
 }
