@@ -18,10 +18,12 @@ init:
         Update-AppveyorBuild -Version "$env:version"
       }
 build:
-  publish_nuget: true
-  publish_nuget_symbols: true
+  project: Myxas.ConfigStringLocalizer.sln
   parallel: true
   verbosity: minimal
+after_build:
+  - ps: >-
+      dotnet pack .\src\Myxas.ConfigStringLocalizer\Myxas.ConfigStringLocalizer.csproj -o .\ -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 deploy:
 - provider: NuGet
   api_key:
