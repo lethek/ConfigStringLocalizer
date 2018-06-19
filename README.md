@@ -8,7 +8,7 @@
 # Introduction 
 ConfigStringLocalizer is a .NET library that provides an implementation of [IStringLocalizer](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.localization.istringlocalizer) for loading resource-strings from an [IConfiguration](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration) instance, as opposed to .NET's default of compiled RESX files. This allows you to keep your translations within a JSON file, an XML file, SQL Server, or almost any other form of storage you need (provided that an appropriate custom ConfigurationProvider is configured).
 
-There is also out-of-the-box support for hot-reloading of changes to your resource strings if the ConfigurationProvider supports a ReloadOnChange option.
+There is also out-of-the-box support for hot-reloading of changes to your resource strings if the ConfigurationProvider supports a ReloadOnChange option (as Microsoft's file-based ones do).
 
 Although these libraries and interfaces were designed for .NET Core, they are targeting .NET Standard 1.3 and up so can also be used on .NET Framework 4.6 and newer.
 

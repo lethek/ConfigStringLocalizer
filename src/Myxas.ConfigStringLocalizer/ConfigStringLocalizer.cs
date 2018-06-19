@@ -10,12 +10,16 @@ using Microsoft.Extensions.Primitives;
 
 namespace Myxas.ConfigStringLocalizer
 {
+
     public class ConfigStringLocalizer : IStringLocalizer
     {
-        public ConfigStringLocalizer(IConfiguration config, StringComparer keyComparer, CultureInfo withCulture = null)
+        public ConfigStringLocalizer(IConfiguration config, StringComparer keyComparer, Func<string, string> keyEncoder,
+            Func<string, string> keyDecoder, CultureInfo withCulture = null)
         {
             _config = config;
             _keyComparer = keyComparer;
+            _keyEncoder = keyEncoder ?? EscapeKeyDelimiters;
+            _keyDecoder = keyDecoder ?? UnescapeKeyDelimiters;
             _withCulture = withCulture;
 
             ChangeToken.OnChange(() => _config.GetReloadToken(), LoadResources);
@@ -27,15 +31,17 @@ namespace Myxas.ConfigStringLocalizer
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {
             return includeParentCultures
-                ? _resources.Keys.Select(x => this[UnescapeKeyDelimiters(x)])
+                ? _resources.Keys.Select(x => this[_keyDecoder(x)])
                 : _resources
                     .Where(x => x.Value.ContainsKey(CurrentUICulture.Name))
-                    .Select(x => new LocalizedString(UnescapeKeyDelimiters(x.Key), x.Value[CurrentUICulture.Name], false));
+                    .Select(
+                        x => new LocalizedString(_keyDecoder(x.Key), x.Value[CurrentUICulture.Name], false)
+                    );
         }
 
 
         public IStringLocalizer WithCulture(CultureInfo culture)
-            => new ConfigStringLocalizer(_config, _keyComparer, culture);
+            => new ConfigStringLocalizer(_config, _keyComparer, _keyEncoder, _keyDecoder, culture);
 
 
         public LocalizedString this[string name] {
@@ -65,7 +71,7 @@ namespace Myxas.ConfigStringLocalizer
                 culture = CurrentUICulture;
             }
 
-            if (!_resources.TryGetValue(EscapeKeyDelimiters(name), out var translations) || translations == null) {
+            if (!_resources.TryGetValue(_keyEncoder(name), out var translations) || translations == null) {
                 return null;
             }
 
@@ -91,8 +97,10 @@ namespace Myxas.ConfigStringLocalizer
                 foreach (var resource in child.GetChildren()) {
                     translations[resource.Key] = resource.Value;
                 }
+
                 newResources[child.Key] = translations;
             }
+
             _resources = newResources;
         }
 
@@ -114,6 +122,9 @@ namespace Myxas.ConfigStringLocalizer
 
         private readonly IConfiguration _config;
         private readonly StringComparer _keyComparer;
+        private readonly Func<string, string> _keyEncoder;
+        private readonly Func<string, string> _keyDecoder;
         private readonly CultureInfo _withCulture;
     }
+
 }

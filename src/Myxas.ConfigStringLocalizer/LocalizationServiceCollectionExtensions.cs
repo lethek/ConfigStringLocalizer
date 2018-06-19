@@ -45,7 +45,6 @@ namespace Myxas.ConfigStringLocalizer
             }
 
             services.TryAddSingleton<IStringLocalizerFactory, ConfigStringLocalizerFactory>();
-            services.TryAddTransient<IStringLocalizer, ConfigStringLocalizer>();
             services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
 
             if (setupAction != null) {
