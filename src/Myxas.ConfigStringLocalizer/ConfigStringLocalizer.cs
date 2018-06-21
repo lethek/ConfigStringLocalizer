@@ -13,8 +13,9 @@ namespace Myxas.ConfigStringLocalizer
 
     public class ConfigStringLocalizer : IStringLocalizer
     {
-        public ConfigStringLocalizer(IConfiguration config, StringComparer keyComparer, Func<string, string> keyEncoder,
-            Func<string, string> keyDecoder, CultureInfo withCulture = null)
+        public ConfigStringLocalizer(IConfiguration config, StringComparer keyComparer = null,
+            Func<string, string> keyEncoder = null, Func<string, string> keyDecoder = null,
+            CultureInfo withCulture = null)
         {
             _config = config;
             _keyComparer = keyComparer;
@@ -29,15 +30,11 @@ namespace Myxas.ConfigStringLocalizer
 
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
-        {
-            return includeParentCultures
+            => includeParentCultures
                 ? _resources.Keys.Select(x => this[_keyDecoder(x)])
                 : _resources
                     .Where(x => x.Value.ContainsKey(CurrentUICulture.Name))
-                    .Select(
-                        x => new LocalizedString(_keyDecoder(x.Key), x.Value[CurrentUICulture.Name], false)
-                    );
-        }
+                    .Select(x => new LocalizedString(_keyDecoder(x.Key), x.Value[CurrentUICulture.Name], false));
 
 
         public IStringLocalizer WithCulture(CultureInfo culture)
