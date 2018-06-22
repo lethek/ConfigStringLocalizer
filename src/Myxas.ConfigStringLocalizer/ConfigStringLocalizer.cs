@@ -13,8 +13,10 @@ namespace Myxas.ConfigStringLocalizer
 
     public class ConfigStringLocalizer : IStringLocalizer
     {
-        public ConfigStringLocalizer(IConfiguration config, StringComparer keyComparer = null,
-            Func<string, string> keyEncoder = null, Func<string, string> keyDecoder = null,
+        public ConfigStringLocalizer(IConfiguration config, 
+            StringComparer keyComparer = null,
+            Func<string, string> keyEncoder = null, 
+            Func<string, string> keyDecoder = null,
             CultureInfo withCulture = null)
         {
             _config = config;

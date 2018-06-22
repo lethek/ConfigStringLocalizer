@@ -15,13 +15,13 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3' OR '$(TargetFramework)' == 'net46'">
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="1.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
